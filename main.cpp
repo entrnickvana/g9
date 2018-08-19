@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
     g9_control w;
     w.show();
 
-    std::thread client_thread(start_client, &w);
+    std::thread client_thread(&client::Connect, new client(), &w);
 
     return a.exec();
 }

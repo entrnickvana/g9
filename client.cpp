@@ -33,9 +33,10 @@ void client::Connect(g9_control* g9)
         //qDebug() << socket->readAll();
         std::cout << socket->readAll().toStdString() << std::endl;
 
+        g9->g9_gui_connected = 1;
+
         char char_arr[6];
         char_arr[4] = '\0';
-        char_arr[3] = '\r';
         char_arr[0] = 'a';
         char_arr[1] = (char)g9->lo_level;
         char_arr[2] = (char)g9->mid_level;
@@ -43,9 +44,10 @@ void client::Connect(g9_control* g9)
 
         do{
 
-            char_arr[0] = (char)g9->lo_level;
-            char_arr[1] = (char)g9->mid_level;
-            char_arr[2] = (char)g9->hi_level;
+            char_arr[0] = (char)g9->g9_gui_connected;
+            char_arr[1] = (char)g9->lo_level;
+            char_arr[2] = (char)g9->mid_level;
+            char_arr[3] = (char)g9->hi_level;
 
             /*
             std::getline(std::cin, user_name);
@@ -63,7 +65,7 @@ void client::Connect(g9_control* g9)
             socket->waitForBytesWritten(2000);
             socket->flush();
 
-        }while(char_arr[0] != 'z');
+        }while(char_arr[0] != 0);
 
         socket->close();
 

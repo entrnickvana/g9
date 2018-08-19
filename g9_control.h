@@ -3,7 +3,9 @@
 
 #include <QWidget>
 #include <iostream>
+#include <thread>
 
+class client;
 
 namespace Ui {
 class g9_control;
@@ -20,6 +22,7 @@ public:
     int lo_level;
     int mid_level;
     int hi_level;
+    int g9_gui_connected;
 
 
 private slots:
@@ -30,6 +33,8 @@ private slots:
     void on_verticalSlider_3_valueChanged(int value);
 
     void on_verticalSlider_2_valueChanged(int value);
+
+    void on_radioButton_toggled(bool checked);
 
 private:
     Ui::g9_control* ui;
